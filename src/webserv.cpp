@@ -4,8 +4,6 @@
 
 #define PORT 8001
 
-
-
 int main(int argc, char **argv) {
 
 	if (argc > 2)
@@ -38,18 +36,17 @@ int main(int argc, char **argv) {
 		#endif
 		
 		ws::Server server(configData.getAllConfigData());
-
-		// server.run() starts by calling server.listen() 
-        server.run(-1);
+        server.run();
 	}
+	catch (std::invalid_argument const& ex)
+    {
+        std::cerr << "Error in config, field not a number:\n" << ex.what() << '\n';
+    }
 	catch(const std::exception& e)
 	{
 		std::cerr << e.what() << '\n';
 		return (-1);
 	}
-	#if DEBUG
-	// system("leaks webserv | tail - 3");
-	#endif
 	std::cout << "Returning" << std::endl;
 	return (0);
 }

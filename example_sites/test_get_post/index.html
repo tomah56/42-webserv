@@ -1,0 +1,23 @@
+<h1><?php echo "This is php"?></h1>
+<?php
+$action = $_GET["action"];
+$myText = $_POST["mytext"];
+$new_data = rand(0, 1000);
+
+if($action == "save") {
+  $targetFolder = "./data/";
+  file_put_contents($targetFolder."mytext".$new_data.".txt", $myText);
+}
+flush();
+?>   
+<html>
+<head>
+ <title>myform</title>
+</head>
+<body>
+  <form action="?action=save" name="myform" method="post">
+    <input type=text name="mytext">
+    <input type="submit" value="save">
+  </form>
+</body>
+</html>
